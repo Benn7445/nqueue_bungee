@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="nQueue Bungee:jar">
+    <output-path>C:/nqueue/bungeecord/plugins</output-path>
+    <root id="archive" name="nQueue Bungee.jar">
+      <element id="module-output" name="nQueue Bungee" />
+    </root>
+  </artifact>
+</component>

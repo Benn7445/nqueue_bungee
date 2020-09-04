@@ -1,0 +1,19 @@
+# All the queue's are listed in "QUEUES".
+QUEUES:
+  # "MINI" is the name of the queue. Can also be renamed without capital letters.
+  MINI:
+    # "BUNGEE" is the bungeecord-server name the player have to be teleported to.
+    BUNGEE: "mini"
+    # "AUTOPAUSE" is if this queue have to be paused on start of the server.
+    AUTOPAUSE: false
+
+# "QUEUE-RUN" is to customize nQueue plugin.
+QUEUE-RUN:
+  # "PLAYER" are the amount of players that have to be sent per "SECONDS"
+  PLAYERS: 2
+  # "SECONDS" are the amount of seconds between each group of "PLAYERS" players.
+  SECONDS: 1
+  # If "PLAYERS: 2" & "SECONDS: 1", there will be sent 2 players every 1 second.
+
+# "BYPASS" is to toggle players bypassing the queue.
+BYPASS: false
