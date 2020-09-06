@@ -4,8 +4,6 @@ import me.absurd.nqueue.NQueue;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import static me.absurd.nqueue.listeners.PluginMessageListener.*;
 
@@ -35,16 +33,8 @@ public class Queue {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getBungeeserver() {
         return bungeeserver;
-    }
-
-    public void setBungeeserver(String bungeeserver) {
-        this.bungeeserver = bungeeserver;
     }
 
     public boolean isOpen() {
@@ -63,22 +53,6 @@ public class Queue {
         this.pause = pause;
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-    public int getSeconds() {
-        return seconds;
-    }
-
-    public void setSeconds(int seconds) {
-        this.seconds = seconds;
-    }
-
     public HashMap<Integer, ProxiedPlayer> getPlayers() {
         return players;
     }
@@ -89,10 +63,6 @@ public class Queue {
 
     public HashMap<ProxiedPlayer, Integer> getPriority() {
         return priority;
-    }
-
-    public void setPriority(HashMap<ProxiedPlayer, Integer> priority) {
-        this.priority = priority;
     }
 
     public static Queue getQueueByName(String name, NQueue nQueue){

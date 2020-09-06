@@ -6,8 +6,6 @@ import me.absurd.nqueue.listeners.LogoutListener;
 import me.absurd.nqueue.listeners.PluginMessageListener;
 import me.absurd.nqueue.listeners.ServerConnectListener;
 import me.absurd.nqueue.queue.Queue;
-import net.md_5.bungee.api.Callback;
-import net.md_5.bungee.api.ServerPing;
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Plugin;
@@ -24,7 +22,6 @@ import java.util.concurrent.TimeUnit;
 
 public final class NQueue extends Plugin {
 
-    public List<String> offlines = new ArrayList<>();
     public List<Queue> getQueues = new ArrayList<>();
     public HashMap<ProxiedPlayer, Integer> getPriority = new HashMap<>();
     public Configuration configuration;
@@ -114,15 +111,13 @@ public final class NQueue extends Plugin {
                     if (configuration != null) {
                         for (int i = configuration.getInt("QUEUE-RUN.PLAYERS"); i >= 0; i--) {
                             if (queue.getPlayers().containsKey(i)) {
-                                if (!offlines.contains(queue.getBungeeserver())) {
-                                    ProxiedPlayer player = queue.getPlayers().get(i);
-                                    if (player != null) {
-                                        ServerConnectListener.joinable.add(player);
-                                        ServerInfo serverInfo = getProxy().getServers().get(queue.getBungeeserver());
-                                        if (serverInfo != null) {
-                                            player.connect(serverInfo);
-                                            Queue.leaveQueue(player, this, false);
-                                        }
+                                ProxiedPlayer player = queue.getPlayers().get(i);
+                                if (player != null) {
+                                    ServerConnectListener.joinable.add(player);
+                                    ServerInfo serverInfo = getProxy().getServers().get(queue.getBungeeserver());
+                                    if (serverInfo != null) {
+                                        player.connect(serverInfo);
+                                        Queue.leaveQueue(player, this, false);
                                     }
                                 }
                             }
@@ -130,13 +125,6 @@ public final class NQueue extends Plugin {
                     }
                 }
             }, 0, configuration.getInt("QUEUE-RUN.SECONDS"), TimeUnit.SECONDS);
-            getProxy().getScheduler().schedule(this, () -> getProxy().getServers().get(queue.getBungeeserver()).ping((result, error) -> {
-                if(error!=null){
-                    offlines.add(queue.getBungeeserver());
-                } else {
-                    offlines.remove(queue.getBungeeserver());
-                }
-            }), 0, 5, TimeUnit.SECONDS);
         }
     }
 }
