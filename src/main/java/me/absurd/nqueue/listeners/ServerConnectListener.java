@@ -25,16 +25,16 @@ public class ServerConnectListener implements Listener {
     public void pluginMessageEvent(ServerConnectEvent event) {
         ProxiedPlayer player = event.getPlayer();
         Queue queue = Queue.getQueueByBungee(event.getTarget().getName(), nQueue);
-        if (queue != null) {
-            PluginMessageListener.askPriority(player, nQueue);
-            if (!joinable.contains(player) && Queue.getQueueByPlayer(player, nQueue) == null) {
-                nQueue.getProxy().getScheduler().schedule(nQueue, (() -> Queue.joinQueue(player, queue, nQueue.getPriority.getOrDefault(player, 1000), nQueue)), 500, 0, TimeUnit.MILLISECONDS);
-                event.setCancelled(true);
-            } else if((bypass.contains(player) && nQueue.configuration.getBoolean("BYPASS")) || joinable.contains(player)) {
-                joinable.remove(player);
-            } else {
-                event.setCancelled(true);
+            if (queue != null) {
+                PluginMessageListener.askPriority(player, nQueue);
+                if (!joinable.contains(player) && Queue.getQueueByPlayer(player, nQueue) == null) {
+                    nQueue.getProxy().getScheduler().schedule(nQueue, (() -> Queue.joinQueue(player, queue, nQueue.getPriority.getOrDefault(player, 1000), nQueue)), 500, 0, TimeUnit.MILLISECONDS);
+                    event.setCancelled(true);
+                } else if ((bypass.contains(player) && nQueue.configuration.getBoolean("BYPASS")) || joinable.contains(player)) {
+                    joinable.remove(player);
+                } else {
+                    event.setCancelled(true);
+                }
             }
-        }
     }
 }
